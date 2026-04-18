@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Top 10 Fastest Cars in the World — 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A;
+    --bg-2:#141414;
+    --panel:#181818;
+    --line:#2a2a2a;
+    --text:#F3F3F1;
+    --dim:#9a9a95;
+    --yellow:#F4D03F;
+    --red:#E63946;
+    --green:#2ecc71;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--text);font-family:'Archivo',system-ui,sans-serif;overflow-x:hidden}
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit}
+
+  /* ---- Subtle grid + noise backdrop ---- */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background-image:
+      linear-gradient(rgba(244,208,63,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244,208,63,.035) 1px, transparent 1px);
+    background-size:80px 80px;
+    pointer-events:none;
+    z-index:0;
+    mask-image:radial-gradient(ellipse at 50% 20%, #000 40%, transparent 85%);
+  }
+
+  /* ---- Top bar ---- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 28px;
+    background:rgba(10,10,10,.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .brand{
+    font-family:'Anton',sans-serif;letter-spacing:.1em;font-size:20px;
+  }
+  .topbar .brand span{color:var(--yellow)}
+  .topbar nav{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.15em;text-transform:uppercase}
+  .topbar nav .dot{color:var(--red);margin:0 10px}
+
+  /* ---- Hero ---- */
+  .hero{
+    position:relative;z-index:1;
+    min-height:100vh;
+    padding:60px 28px 80px;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:40px;
+    align-content:center;
+    border-bottom:1px solid var(--line);
+  }
+  .hero .meta{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;color:var(--dim);
+    letter-spacing:.3em;text-transform:uppercase;
+    display:flex;gap:20px;flex-wrap:wrap;
+  }
+  .hero .meta span b{color:var(--yellow);font-weight:400}
+  .hero h1{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(64px, 14vw, 220px);
+    line-height:.85;
+    letter-spacing:-.01em;
+    text-transform:uppercase;
+    margin-top:-6px;
+  }
+  .hero h1 .row{display:block}
+  .hero h1 .row .outline{
+    -webkit-text-stroke:2px var(--yellow);
+    color:transparent;
+  }
+  .hero h1 .row.mph{color:var(--yellow);position:relative}
+  .hero h1 .row.mph::after{
+    content:"MPH";
+    position:absolute;bottom:10px;margin-left:14px;
+    font-size:.18em;letter-spacing:.25em;color:var(--dim);
+    font-family:'JetBrains Mono',monospace;
+    vertical-align:top;
+  }
+  .hero .subline{
+    max-width:760px;font-size:17px;line-height:1.55;color:var(--dim);
+  }
+  .hero .subline b{color:var(--text);font-weight:500}
+
+  .hero .gauge{
+    margin-top:6px;
+    display:flex;align-items:flex-end;gap:14px;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .hero .gauge .num{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(72px, 10vw, 150px);
+    color:var(--red);
+    line-height:.9;
+    letter-spacing:.02em;
+  }
+  .hero .gauge .unit{font-size:14px;letter-spacing:.3em;color:var(--dim);text-transform:uppercase;padding-bottom:18px}
+  .hero .gauge .label{font-size:11px;letter-spacing:.3em;color:var(--dim);text-transform:uppercase;padding-bottom:18px;margin-left:auto;max-width:220px;text-align:right;line-height:1.5}
+
+  .scroll-cue{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:.3em;color:var(--dim);text-transform:uppercase;
+    display:flex;align-items:center;gap:10px;
+  }
+  .scroll-cue::before{content:"";display:block;width:40px;height:1px;background:var(--dim)}
+
+  /* ---- Ranking list / quick index ---- */
+  .index{
+    position:relative;z-index:1;
+    padding:60px 28px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, transparent, rgba(244,208,63,.02));
+  }
+  .index h2{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.3em;
+    color:var(--dim);text-transform:uppercase;margin-bottom:24px;
+  }
+  .index-grid{
+    display:grid;grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+    gap:0;border-top:1px solid var(--line);
+  }
+  .index-item{
+    display:flex;align-items:baseline;gap:14px;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+    border-right:1px solid var(--line);
+    padding-right:16px;
+    transition:background .2s ease;
+  }
+  .index-item:hover{background:rgba(244,208,63,.04)}
+  .index-item .rk{
+    font-family:'Anton',sans-serif;font-size:36px;color:var(--yellow);min-width:52px;
+  }
+  .index-item .nm{font-size:14px;font-weight:500;line-height:1.2}
+  .index-item .sp{
+    margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--dim);
+    white-space:nowrap;
+  }
+
+  /* ---- Car cards ---- */
+  .cars{position:relative;z-index:1}
+  .car{
+    padding:80px 28px;
+    border-bottom:1px solid var(--line);
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:48px;
+    align-items:center;
+    position:relative;
+  }
+  .car:nth-child(even){grid-template-columns:1fr 1.1fr}
+  .car:nth-child(even) .media{order:2}
+  .car:nth-child(even) .info{order:1}
+
+  .car .rank-stamp{
+    position:absolute;
+    top:18px;left:28px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.3em;color:var(--dim);text-transform:uppercase;
+  }
+  .car .rank-stamp b{color:var(--yellow);font-weight:400}
+
+  .media{
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:var(--bg-2);
+    aspect-ratio: 16/10;
+  }
+  .media img{
+    width:100%;height:100%;object-fit:cover;object-position:center;
+    transition:transform .8s ease;
+  }
+  .car:hover .media img{transform:scale(1.03)}
+  .media::after{
+    content:"";
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, transparent 55%, rgba(10,10,10,.55));
+    pointer-events:none;
+  }
+  .media .tag{
+    position:absolute;top:14px;left:14px;
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.25em;
+    color:var(--yellow);background:rgba(10,10,10,.75);padding:6px 10px;
+    border:1px solid var(--yellow);text-transform:uppercase;
+  }
+
+  .info .rank{
+    display:flex;align-items:baseline;gap:18px;margin-bottom:8px;
+  }
+  .info .rank .no{
+    font-family:'Anton',sans-serif;font-size:clamp(90px, 11vw, 160px);
+    line-height:.85;color:var(--yellow);letter-spacing:-.02em;
+  }
+  .info .rank .of{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.3em;color:var(--dim);
+    text-transform:uppercase;
+  }
+
+  .info h3{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(38px, 5vw, 64px);
+    line-height:.95;letter-spacing:.005em;text-transform:uppercase;
+    margin-bottom:4px;
+  }
+  .info .origin{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;
+    color:var(--dim);text-transform:uppercase;margin-bottom:22px;
+  }
+
+  .speed-row{
+    display:flex;align-items:flex-end;gap:16px;margin-bottom:22px;
+    padding-bottom:22px;border-bottom:1px dashed var(--line);
+  }
+  .speed-row .mph{
+    font-family:'Anton',sans-serif;color:var(--red);
+    font-size:clamp(56px, 7vw, 88px);line-height:.9;
+  }
+  .speed-row .kph{
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--dim);
+    padding-bottom:10px;line-height:1.5;
+  }
+  .speed-row .kph b{color:var(--text);font-weight:700;display:block;font-size:14px}
+  .speed-row .verified{
+    margin-left:auto;padding-bottom:12px;
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--green);
+    border:1px solid var(--green);padding:6px 10px;
+  }
+  .speed-row .verified.theo{color:var(--yellow);border-color:var(--yellow)}
+
+  .specs{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;
+    margin-bottom:22px;
+    border-top:1px solid var(--line);
+    border-left:1px solid var(--line);
+  }
+  .specs div{
+    padding:10px 14px;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    font-family:'JetBrains Mono',monospace;font-size:12px;
+  }
+  .specs div span{display:block;color:var(--dim);font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:4px}
+  .specs div b{color:var(--text);font-weight:400;font-size:13px}
+
+  .info p{font-size:15.5px;line-height:1.65;color:#ccc;max-width:56ch}
+
+  /* ---- Speed bar ---- */
+  .bar{
+    margin-top:22px;
+    position:relative;height:4px;background:var(--line);overflow:hidden;
+  }
+  .bar .fill{position:absolute;inset:0;background:var(--yellow);transform-origin:left;transform:scaleX(0);transition:transform 1.2s cubic-bezier(.2,.7,.1,1)}
+  .bar.in .fill{transform:scaleX(var(--pct, .5))}
+  .bar .scale{
+    position:absolute;top:-14px;right:0;
+    font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:.2em;
+  }
+
+  /* ---- Footer ---- */
+  footer{
+    position:relative;z-index:1;
+    padding:80px 28px 60px;
+    display:grid;gap:20px;
+    border-top:1px solid var(--line);
+  }
+  footer h4{font-family:'Anton',sans-serif;font-size:44px;letter-spacing:.01em;text-transform:uppercase}
+  footer p{font-size:14px;color:var(--dim);max-width:70ch;line-height:1.6}
+  footer .notes{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);
+    border-top:1px solid var(--line);padding-top:20px;margin-top:20px;letter-spacing:.05em;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width:900px){
+    .car, .car:nth-child(even){grid-template-columns:1fr; gap:28px; padding:60px 20px}
+    .car:nth-child(even) .media, .car:nth-child(even) .info{order:initial}
+    .hero{padding:40px 20px 60px}
+    .topbar{padding:12px 18px}
+    .speed-row{flex-wrap:wrap;gap:10px}
+    .speed-row .verified{margin-left:0}
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="brand">APEX <span>/</span> 2026</div>
+  <nav>FASTEST <span class="dot">●</span> PRODUCTION <span class="dot">●</span> CARS</nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="meta">
+    <span>EDITION <b>2026</b></span>
+    <span>ENTRIES <b>10</b></span>
+    <span>RANGE <b>248&ndash;330 MPH</b></span>
+    <span>UPDATED <b>APR 2026</b></span>
+  </div>
+
+  <h1>
+    <span class="row">THE TOP 10</span>
+    <span class="row outline">FASTEST</span>
+    <span class="row">CARS ON</span>
+    <span class="row mph">EARTH</span>
+  </h1>
+
+  <p class="subline">
+    Ten hypercars. Four continents. One shared obsession: <b>breaking 250 mph</b>. From verified production-car records to engineering simulations pushing 330 mph, this is the state of the art for 2026, ranked by top speed.
+  </p>
+
+  <div class="gauge">
+    <div class="num" id="gauge-num">000</div>
+    <div class="unit">MPH<br>PEAK</div>
+    <div class="label">Highest speed featured on this list &mdash; Koenigsegg Jesko Absolut</div>
+  </div>
+
+  <div class="scroll-cue">SCROLL TO BEGIN</div>
+</section>
+
+<!-- QUICK INDEX -->
+<section class="index">
+  <h2>// Ranking Index</h2>
+  <div class="index-grid">
+    <a class="index-item" href="#car-1"><span class="rk">01</span><span class="nm">Koenigsegg Jesko Absolut</span><span class="sp">330 MPH</span></a>
+    <a class="index-item" href="#car-2"><span class="rk">02</span><span class="nm">Yangwang U9 Xtreme</span><span class="sp">308 MPH</span></a>
+    <a class="index-item" href="#car-3"><span class="rk">03</span><span class="nm">Bugatti Chiron SS 300+</span><span class="sp">304 MPH</span></a>
+    <a class="index-item" href="#car-4"><span class="rk">04</span><span class="nm">SSC Tuatara</span><span class="sp">295 MPH</span></a>
+    <a class="index-item" href="#car-5"><span class="rk">05</span><span class="nm">Bugatti Tourbillon</span><span class="sp">276 MPH</span></a>
+    <a class="index-item" href="#car-6"><span class="rk">06</span><span class="nm">Hennessey Venom F5</span><span class="sp">272 MPH</span></a>
+    <a class="index-item" href="#car-7"><span class="rk">07</span><span class="nm">Bugatti Mistral</span><span class="sp">261 MPH</span></a>
+    <a class="index-item" href="#car-8"><span class="rk">08</span><span class="nm">Rimac Nevera</span><span class="sp">258 MPH</span></a>
+    <a class="index-item" href="#car-9"><span class="rk">09</span><span class="nm">McLaren Speedtail</span><span class="sp">250 MPH</span></a>
+    <a class="index-item" href="#car-10"><span class="rk">10</span><span class="nm">Koenigsegg Gemera</span><span class="sp">248 MPH</span></a>
+  </div>
+</section>
+
+<!-- CARS -->
+<main class="cars">
+
+  <!-- 1 -->
+  <article class="car" id="car-1">
+    <div class="rank-stamp">ENTRY <b>01 / 10</b> &nbsp;&nbsp;&bull;&nbsp;&nbsp; KING OF SPEED</div>
+    <div class="media">
+      <div class="tag">SWEDEN // 2024</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/2023%20Koenigsegg%20Jesko%20Absolut.jpg?width=1400" alt="Koenigsegg Jesko Absolut" loading="lazy">
+    </div>
+    <div class="info">
+      <div class="rank"><span class="no">01</span><span class="of">/10 &nbsp; TOP SPEED</span></div>
+      <h3>Koenigsegg<br>Jesko Absolut</h3>
+      <div class="origin">Ängelholm, Sweden &nbsp;&nbsp;/&nbsp;&nbsp; $3.0M &nbsp;&nbsp;/&nbsp;&nbsp; 125 units</div>
+      <div class="speed-row">
+        <div class="mph">330</div>
+        <div class="kph">MPH peak<br><b>531 KM/H</b></div>
+        <div class="verified theo">Simulated</div>
+      </div>
+      <div class="specs">
+        <div><span>Engine</span><b>5.0L Twin-turbo V8</b></div>
+        <div><span>Power</span><b>1,600 hp (E85)</b></div>
+        <div><span>Drag Cd</span><b>0.278</b></div>
+        <div><span>0–60 mph</span><b>~2.5 s</b></div>
+      </div>
+      <p>The Absolut is Koenigsegg's answer to physics. Engineers stripped the Jesko Attack's huge rear wing, stretched the tail, smoothed every louver, and dropped the drag coefficient to a freakish 0.278. Paired with the fastest-revving production V8 ever and the 9-speed Light Speed Transmission, the Absolut targets a theoretical 330 mph. No production car has attempted faster.</p>
+      <div class="bar in" style="--pct:1"><div class="fill"></div><div class="scale">330 MPH</div></div>
+    </div>
+  </article>
+
+  <!-- 2 -->
+  <article class="car" id="car-2">
+    <div class="rank-stamp">ENTRY <b>02 / 10</b> &nbsp;&nbsp;&bull;&nbsp;&nbsp; EV WORLD RECORD</div>
+    <div class="media">
+      <div class="tag">CHINA // 2025</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/2024%20Yangwang%20U9%20front%20view%2001.png?width=1400" alt="Yangwang U9" loading="lazy">
+    </div>
+    <div class="info">
+      <div class="rank"><span class="no">02</span><span class="of">/10 &nbsp; TOP SPEED</span></div>
+      <h3>Yangwang<br>U9 Xtreme</h3>
+      <div class="origin">BYD &middot; Shenzhen, China &nbsp;&nbsp;/&nbsp;&nbsp; ~£200K+ &nbsp;&nbsp;/&nbsp;&nbsp; 30 units</div>
+      <div class="speed-row">
+        <div class="mph">308</div>
+        <div class="kph">MPH verified<br><b>496 KM/H</b></div>
+        <div class="verified">Record</div>
+      </div>
+      <div class="specs">
+        <div><span>Drivetrain</span><b>Quad electric motors</b></div>
+        <div><span>Power</span><b>3,000 hp</b></div>
+        <div><span>Architecture</span><b>1,200-volt system</b></div>
+        <div><span>Record set</span><b>Sept 2025, Germany</b></div>
+      </div>
+      <p>In September 2025, the U9 Xtreme clocked 308 mph on a runway in Germany, beating every petrol-powered production car ever tested. Four motors and a 1,200-volt electrical backbone (triple the voltage of an average EV) produce 3,000 horsepower. A watershed moment: the world's fastest production car is now electric, and it's from China.</p>
+      <div class="bar in" style="--pct:.933"><div class="fill"></div><div class="scale">308 MPH</div></div>
+    </div>
+  </article>
+
+  <!-- 3 -->
+  <article class="car" id="car-3">
+    <div class="rank-stamp">ENTRY <b>03 / 10</b> &nbsp;&nbsp;&bull;&nbsp;&nbsp; FIRST TO 300 MPH</div>
+    <div class="media">
+      <div class="tag">FRANCE // 2019</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bugatti%20Chiron%20Super%20Sport%20300%2B%20-%20Molsheim%201.jpg?width=1400" alt="Bugatti Chiron Super Sport 300+" loading="lazy">
+    </div>
+    <div class="info">
+      <div class="rank"><span class="no">03</span><span class="of">/10 &nbsp; TOP SPEED</span></div>
+      <h3>Bugatti Chiron<br>Super Sport 300+</h3>
+      <div class="origin">Molsheim, France &nbsp;&nbsp;/&nbsp;&nbsp; $3.9M &nbsp;&nbsp;/&nbsp;&nbsp; 30 units</div>
+      <div class="speed-row">
+        <div class="mph">304</div>
+        <div class="kph">MPH verified<br><b>490 KM/H</b></div>
+        <div class="verified">TÜV Certified</div>
+      </div>
+      <div class="specs">
+        <div><span>Engine</span><b>8.0L Quad-turbo W16</b></div>
+        <div><span>Power</span><b>1,578 hp</b></div>
+        <div><span>Record date</span><b>August 2019</b></div>
+        <div><span>Weight</span><b>~1,995 kg</b></div>
+      </div>
+      <p>In 2019, the Chiron Super Sport 300+ became the first production car in history to officially break 300 mph, verified by TÜV at 304.77 mph on Volkswagen's Ehra-Lessien test track. An extended tail, reworked aero, and the monstrous 16-cylinder W16 engine made it possible. Seven years later, only one car has officially gone faster.</p>
+      <div class="bar in" style="--pct:.921"><div class="fill"></div><div class="scale">304 MPH</div></div>
+    </div>
+  </article>
+
+  <!-- 4 -->
+  <article class="car" id="car-4">
+    <div class="rank-stamp">ENTRY <b>04 / 10</b> &nbsp;&nbsp;&bull;&nbsp;&nbsp; AMERICAN MUSCLE REBORN</div>
+    <div class="media">
+      <div class="tag">USA // 2022</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/2019%20SSC%20Tuatara%20at%20Pebble%20Beach%20Press%20Conference.jpg?width=1400" alt="SSC Tuatara" loading="lazy">
+    </div>
+    <div class="info">
+      <div class="rank"><span class="no">04</span><span class="of">/10 &nbsp; TOP SPEED</span></div>
+      <h3>SSC<br>Tuatara</h3>
+      <div class="origin">Richland, Washington, USA &nbsp;&nbsp;/&nbsp;&nbsp; $1.9M &nbsp;&nbsp;/&nbsp;&nbsp; 100 units</div>
+      <div class="speed-row">
+        <div class="mph">295</div>
+        <div class="kph">MPH verified<br><b>475 KM/H</b></div>
+        <div class="verified">One-way</div>
+      </div>
+      <div class="specs">
+        <div><span>Engine</span><b>5.9L Twin-turbo V8</b></div>
+        <div><span>Power</span><b>1,750 hp on E85</b></div>
+        <div><span>Drag Cd</span><b>0.279</b></div>
+        <div><span>Weight</span><b>~1,247 kg</b></div>
+      </div>
+      <p>Named after a New Zealand reptile with the fastest molecular evolution on Earth, the Tuatara is pure American aerospace inspiration. SSC's original 2020 record run claimed 331 mph but was retracted after a GPS error. In May 2022, owner Larry Caplin hit a verified 295 mph at Space Florida's Launch and Landing Facility. The crown was never officially theirs, but the car is legitimately one of the fastest ever built.</p>
+      <div class="bar in" style="--pct:.894"><div class="fill"></div><div class="scale">295 MPH</div></div>
+    </div>
+  </article>
+
+  <!-- 5 -->
+  <article class="car" id="car-5">
+    <div class="rank-stamp">ENTRY <b>05 / 10</b> &nbsp;&nbsp;&bull;&nbsp;&nbsp; V16 HYBRID</div>
+    <div class="media">
+      <div class="tag">FRANCE // 2026</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bugatti%20Tourbillon%20-%2003.jpg?width=1400" alt="Bugatti Tourbillon" loading="lazy">
+    </div>
+    <div class="info">
+      <div class="rank"><span class="no">05</span><span class="of">/10 &nbsp; TOP SPEED</span></div>
+      <h3>Bugatti<br>Tourbillon</h3>
+      <div class="origin">Molsheim, France &nbsp;&nbsp;/&nbsp;&nbsp; $3.9M &nbsp;&nbsp;/&nbsp;&nbsp; 250 units</div>
+      <div class="speed-row">
+        <div class="mph">276</div>
+        <div class="kph">MPH rated<br><b>445 KM/H</b></div>
+        <div class="verified theo">Claimed</div>
+      </div>
+      <div class="specs">
+        <div><span>Engine</span><b>8.3L V16 + 3 motors</b></div>
+        <div><span>Power</span><b>1,800 hp (hybrid)</b></div>
+        <div><span>0–60 mph</span><b>Under 2.0 s</b></div>
+        <div><span>Redline</span><b>9,000 rpm</b></div>
+      </div>
+      <p>The Chiron's successor ditches the W16 for a naturally aspirated 8.3-litre V16 built with Cosworth, spinning to 9,000 rpm, paired with three electric motors for 1,800 total horsepower. The instrument cluster is a real mechanical Swiss watch movement. Rationality has left the building, and that's exactly what a Bugatti is for.</p>
+      <div class="bar in" style="--pct:.836"><div class="fill"></div><div class="scale">276 MPH</div></div>
+    </div>
+  </article>
+
+  <!-- 6 -->
+  <article class="car" id="car-6">
+    <div class="rank-stamp">ENTRY <b>06 / 10</b> &nbsp;&nbsp;&bull;&nbsp;&nbsp; TEXAS FIREPOWER</div>
+    <div class="media">
+      <div class="tag">USA // 2022</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/2022%20Hennessey%20Venom%20F5.jpg?width=1400" alt="Hennessey Venom F5" loading="lazy">
+    </div>
+    <div class="info">
+      <div class="rank"><span class="no">06</span><span class="of">/10 &nbsp; TOP SPEED</span></div>
+      <h3>Hennessey<br>Venom F5</h3>
+      <div class="origin">Sealy, Texas, USA &nbsp;&nbsp;/&nbsp;&nbsp; $2.1M &nbsp;&nbsp;/&nbsp;&nbsp; 24 units</div>
+      <div class="speed-row">
+        <div class="mph">272</div>
+        <div class="kph">MPH tested<br><b>437 KM/H</b></div>
+        <div class="verified">Partial run</div>
+      </div>
+      <div class="specs">
+        <div><span>Engine</span><b>6.6L Twin-turbo V8</b></div>
+        <div><span>Power</span><b>1,817 hp</b></div>
+        <div><span>Torque</span><b>1,193 lb-ft</b></div>
+        <div><span>Dry weight</span><b>1,360 kg</b></div>
+      </div>
+      <p>Named after the top category on the Fujita tornado scale, the F5 is old-school American in the best way: nearly 1,800 horsepower running through one clutch to two rear tyres. In early 2022 it hit 272 mph at Kennedy Space Center, with Hennessey confirming the car was not at full power. A 311 mph / 500 km/h target run is still pending.</p>
+      <div class="bar in" style="--pct:.824"><div class="fill"></div><div class="scale">272 MPH</div></div>
+    </div>
+  </article>
+
+  <!-- 7 -->
+  <article class="car" id="car-7">
+    <div class="rank-stamp">ENTRY <b>07 / 10</b> &nbsp;&nbsp;&bull;&nbsp;&nbsp; LAST OF THE W16</div>
+    <div class="media">
+      <div class="tag">FRANCE // 2024</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/2024%20Bugatti%20Mistral.jpg?width=1400" alt="Bugatti Mistral" loading="lazy">
+    </div>
+    <div class="info">
+      <div class="rank"><span class="no">07</span><span class="of">/10 &nbsp; TOP SPEED</span></div>
+      <h3>Bugatti<br>Mistral</h3>
+      <div class="origin">Molsheim, France &nbsp;&nbsp;/&nbsp;&nbsp; $5M &nbsp;&nbsp;/&nbsp;&nbsp; 99 units</div>
+      <div class="speed-row">
+        <div class="mph">261</div>
+        <div class="kph">MPH verified<br><b>420 KM/H</b></div>
+        <div class="verified">Fastest roadster</div>
+      </div>
+      <div class="specs">
+        <div><span>Engine</span><b>8.0L Quad-turbo W16</b></div>
+        <div><span>Power</span><b>1,578 hp</b></div>
+        <div><span>Body</span><b>Open-top roadster</b></div>
+        <div><span>W16 status</span><b>The final one</b></div>
+      </div>
+      <p>The last word on an era. The Mistral is the final production car Bugatti will ever build around the legendary 16-cylinder engine. In 2024 it claimed the title of world's fastest roadster at 261 mph, with no roof and the wind blasting through. All 99 units were sold before the car was even announced. An ending wearing its Sunday best.</p>
+      <div class="bar in" style="--pct:.791"><div class="fill"></div><div class="scale">261 MPH</div></div>
+    </div>
+  </article>
+
+  <!-- 8 -->
+  <article class="car" id="car-8">
+    <div class="rank-stamp">ENTRY <b>08 / 10</b> &nbsp;&nbsp;&bull;&nbsp;&nbsp; ELECTRIC LIGHTNING</div>
+    <div class="media">
+      <div class="tag">CROATIA // 2023</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/2021%20Rimac%20Nevera.jpg?width=1400" alt="Rimac Nevera" loading="lazy">
+    </div>
+    <div class="info">
+      <div class="rank"><span class="no">08</span><span class="of">/10 &nbsp; TOP SPEED</span></div>
+      <h3>Rimac<br>Nevera</h3>
+      <div class="origin">Sveta Nedelja, Croatia &nbsp;&nbsp;/&nbsp;&nbsp; $2.4M &nbsp;&nbsp;/&nbsp;&nbsp; 150 units</div>
+      <div class="speed-row">
+        <div class="mph">258</div>
+        <div class="kph">MPH verified<br><b>415 KM/H</b></div>
+        <div class="verified">EV record</div>
+      </div>
+      <div class="specs">
+        <div><span>Drivetrain</span><b>Four electric motors</b></div>
+        <div><span>Power</span><b>1,888 hp</b></div>
+        <div><span>0–60 mph</span><b>1.74 s</b></div>
+        <div><span>Battery</span><b>120 kWh</b></div>
+      </div>
+      <p>Named after a sudden, lightning-charged storm that rolls off the Adriatic, the Nevera is the fastest-accelerating production car on the planet. Each wheel gets its own motor. In May 2023 the Nevera set 23 independent world records in a single day, including 0–60 mph in 1.74 seconds. Top Gear gave it 9/10 and used the word "savage" without apology.</p>
+      <div class="bar in" style="--pct:.782"><div class="fill"></div><div class="scale">258 MPH</div></div>
+    </div>
+  </article>
+
+  <!-- 9 -->
+  <article class="car" id="car-9">
+    <div class="rank-stamp">ENTRY <b>09 / 10</b> &nbsp;&nbsp;&bull;&nbsp;&nbsp; SPIRITUAL MCLAREN F1</div>
+    <div class="media">
+      <div class="tag">UK // 2020</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/2019%20McLaren%20Speedtail%20%28Rob%20Melville%29.jpg?width=1400" alt="McLaren Speedtail" loading="lazy">
+    </div>
+    <div class="info">
+      <div class="rank"><span class="no">09</span><span class="of">/10 &nbsp; TOP SPEED</span></div>
+      <h3>McLaren<br>Speedtail</h3>
+      <div class="origin">Woking, England &nbsp;&nbsp;/&nbsp;&nbsp; $2.3M &nbsp;&nbsp;/&nbsp;&nbsp; 106 units</div>
+      <div class="speed-row">
+        <div class="mph">250</div>
+        <div class="kph">MPH verified<br><b>403 KM/H</b></div>
+        <div class="verified">Tested</div>
+      </div>
+      <div class="specs">
+        <div><span>Powertrain</span><b>Petrol-electric hybrid</b></div>
+        <div><span>Power</span><b>1,035 hp combined</b></div>
+        <div><span>Seating</span><b>3, driver centred</b></div>
+        <div><span>0–186 mph</span><b>12.8 s</b></div>
+      </div>
+      <p>A modern love letter to the McLaren F1 — three seats, driver positioned dead centre, and a teardrop tail that seems drawn by the wind itself. At the Kennedy Space Center runway, the Speedtail clocked 250 mph on 30 separate test runs, shattering the F1's 243 mph top speed record that had stood for over two decades. Britain's answer to hypercar minimalism.</p>
+      <div class="bar in" style="--pct:.758"><div class="fill"></div><div class="scale">250 MPH</div></div>
+    </div>
+  </article>
+
+  <!-- 10 -->
+  <article class="car" id="car-10">
+    <div class="rank-stamp">ENTRY <b>10 / 10</b> &nbsp;&nbsp;&bull;&nbsp;&nbsp; THE 4-SEAT HYPERCAR</div>
+    <div class="media">
+      <div class="tag">SWEDEN // 2024</div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/2020%20Koenigsegg%20Gemera%202.0.jpg?width=1400" alt="Koenigsegg Gemera" loading="lazy">
+    </div>
+    <div class="info">
+      <div class="rank"><span class="no">10</span><span class="of">/10 &nbsp; TOP SPEED</span></div>
+      <h3>Koenigsegg<br>Gemera</h3>
+      <div class="origin">Ängelholm, Sweden &nbsp;&nbsp;/&nbsp;&nbsp; $1.7M &nbsp;&nbsp;/&nbsp;&nbsp; 300 units</div>
+      <div class="speed-row">
+        <div class="mph">248</div>
+        <div class="kph">MPH rated<br><b>400 KM/H</b></div>
+        <div class="verified theo">Claimed</div>
+      </div>
+      <div class="specs">
+        <div><span>Powertrain</span><b>Twin-turbo V8 + 3 motors</b></div>
+        <div><span>Power</span><b>2,268 hp</b></div>
+        <div><span>Seats</span><b>4 full-size</b></div>
+        <div><span>0–60 mph</span><b>1.9 s</b></div>
+      </div>
+      <p>The Gemera is, in Koenigsegg's words, a "Mega-GT": a four-seat grand tourer with 2,268 horsepower, currently the most powerful production car ever built. Twin-turbo V8 plus three electric motors. It has proper rear seats, cupholders, and luggage space, and it will still hit 60 mph before most cars finish their first gear. Engineering as dark humour.</p>
+      <div class="bar in" style="--pct:.751"><div class="fill"></div><div class="scale">248 MPH</div></div>
+    </div>
+  </article>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <h4>Notes on the ranking.</h4>
+  <p>This list ranks <b>road-legal production cars</b> by their highest achieved or officially rated top speed. Track-only builds (McMurtry Spéirling, Bugatti Bolide, Aston Martin Valkyrie AMR Pro) and one-off concepts are excluded. Speed figures are drawn from manufacturer claims and independent verification bodies including TÜV and Racelogic. Where runs are simulated or unverified, the "Simulated" or "Claimed" tag appears; where the number has been certified through instrumented testing, the "Verified" or "Record" tag appears.</p>
+  <p>Acceleration is a different game. Electric cars like the Rimac Nevera and Lucid Air Sapphire dominate 0–60 mph charts, and the McMurtry Spéirling holds the outright production acceleration crown (track-only). But on top speed &mdash; a one-dimensional fight against air resistance at enormous velocity &mdash; these ten cars are currently standing alone.</p>
+  <div class="notes">
+    SOURCES // Carwow · Top Gear · Road &amp; Track · RAC · Automobilisto · Bugatti · Koenigsegg · Hennessey · Rimac · McLaren · SSC North America · Wikipedia &nbsp;&nbsp;|&nbsp;&nbsp; IMAGES // Wikimedia Commons &nbsp;&nbsp;|&nbsp;&nbsp; COMPILED APR 2026
+  </div>
+</footer>
+
+<script>
+  // Animated top-speed gauge in hero
+  (function(){
+    const el=document.getElementById('gauge-num');
+    if(!el) return;
+    const target=330, dur=1800, start=performance.now();
+    function tick(t){
+      const p=Math.min(1,(t-start)/dur);
+      const eased=1-Math.pow(1-p,3);
+      el.textContent=Math.round(target*eased).toString().padStart(3,'0');
+      if(p<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+
+  // Animate speed bars on scroll
+  (function(){
+    const bars=document.querySelectorAll('.bar');
+    if(!('IntersectionObserver' in window)) return;
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+        }
+      });
+    },{threshold:.2});
+    bars.forEach(b=>{b.classList.remove('in');io.observe(b)});
+  })();
+
+  // Smooth scroll for index links
+  document.querySelectorAll('.index-item').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const id=a.getAttribute('href');
+      if(id&&id.startsWith('#')){
+        const t=document.querySelector(id);
+        if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
